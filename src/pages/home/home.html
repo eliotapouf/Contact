@@ -1,15 +1,17 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="dark">
         <ion-title>
-            Contacts
+            Member Area
         </ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="logout()">
+                <ion-icon name="log-out"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
-    <button ion-button clear block (click)="getContacts()">Get Contacts</button>
-    <button ion-button clear block (click)="findContact()">Find Contacts</button>
-    <button ion-button clear block (click)="addContact()">Add Contacts</button>
-
+<ion-content class="home" padding>
+    <h3>Welcome inside, {{username}}!</h3>
+    Your Email is: {{email}}
 </ion-content>

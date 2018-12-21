@@ -1,53 +1,25 @@
-import { Contacts, ContactName, ContactField, ContactFieldType, ContactFindOptions } from '@ionic-native/contacts';
 import { Component } from '@angular/core';
+import { NavController, IonicPage } from 'ionic-angular';
 
+import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
+
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  constructor(private contact: Contacts) {}
-
-  async getContacts() {
-    try{
-      const selectedContact = await this.contact.pickContact();
-      console.log(`Selected contact:`, selectedContact);
-    }catch(e){
-      console.error(e);
-    }
+  username = '';
+  email = '';
+  constructor(private nav: NavController, private auth: AuthServiceProvider) {
+    let info = this.auth.getUserInfo();
+    this.username = info['name'];
+    this.email = info['email'];
   }
 
-  async addContact(){
-    try{
-      const newContact = this.contact.create();
-
-      newContact.name = new ContactName(null, 'Thiaka', 'Badji')
-      newContact.phoneNumbers = [new ContactField('mobile', '00221777739260')];
-
-      await newContact.save();
-
-      console.log(`New contact saved`, newContact);
-    }catch(e){
-      console.error(e);
-    }
+  public logout() {
+    this.auth.logout().subscribe(succ => {
+      this.nav.setRoot('LoginPage')
+    });
   }
-  
-
-  async findContact() {
-    try{
-      const options = new ContactFindOptions();
-      
-      options.filter = 'A Test Contact';
-      options.hasPhoneNumber = true;
-
-      const fields: ContactFieldType[] = ['name'];
-
-      const filteredContact = await this.contact.find(fields, options)
-      console.log(`Filtered contacts: `, filteredContact);
-    }catch(e){
-      console.error(e);
-    }
-  }
-
 }

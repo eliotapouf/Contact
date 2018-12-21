@@ -12,11 +12,22 @@ import { Firebase} from '@ionic-native/firebase';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ContactPage } from '../pages/contact/contact';
+import { DialerPage } from './../pages/dialer/dialer';
+import { SmsPage } from './../pages/sms/sms';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ContactPage,
+    DialerPage,
+    SmsPage,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +36,12 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ContactPage,
+    DialerPage,
+    SmsPage,
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
@@ -36,7 +52,8 @@ import { HomePage } from '../pages/home/home';
     CallNumber,
     Calendar,
     Camera,
-    Firebase
+    Firebase,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}
